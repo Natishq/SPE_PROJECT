@@ -50,7 +50,8 @@ var userSchema = schema(
             type:Array,
             default:[]
         }
-    }
+    },
+    { timestamps:true }
 );
 
 // this is the method to the schema that we definig to set cypted password using the plain text password we are getting 
