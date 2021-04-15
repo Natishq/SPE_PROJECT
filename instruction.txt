@@ -1,1 +1,3 @@
 to run the file plase follow the instruction
+
+install -> node and mongo Dz

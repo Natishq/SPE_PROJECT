@@ -1,0 +1,24 @@
+{
+  "name": "spe_project",
+  "version": "1.0.0",
+  "description": "In this project we are going to use the MERN stack for developing a platform for the WORK-FORCE",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tusharshaily/SPE_PROJECT.git"
+  },
+  "author": "tushar shaily",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tusharshaily/SPE_PROJECT/issues"
+  },
+  "homepage": "https://github.com/tusharshaily/SPE_PROJECT#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
