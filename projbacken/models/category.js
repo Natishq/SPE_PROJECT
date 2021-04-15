@@ -17,5 +17,7 @@ const categorySchema = new moongoose.Schema(
 );
 
 
+module.exports = moongoose.model('Category',categorySchema);
+
 
 
