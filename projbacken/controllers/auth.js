@@ -86,7 +86,7 @@ exports.signin = (req,res) => {
 
     User.findOne({email}, (err,user) => {
 
-        if(err)
+        if(err || !user)
         {
             return res.status(422).json({ error : "email  not register "});
         }
