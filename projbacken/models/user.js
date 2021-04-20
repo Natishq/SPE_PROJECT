@@ -96,4 +96,4 @@ userSchema.virtual('password')
 // now we are going to use virtuals for cumputing stuff on the fly ! Note they are not stored in mongodb and they are not part 
 // of json object by default  
 
-module.exports = mongoose.model("user",userSchema);
+module.exports = mongoose.model("User",userSchema);
