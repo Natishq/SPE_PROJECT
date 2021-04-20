@@ -7,14 +7,19 @@ const mongoose = require('mongoose');
 
 const express = require('express');
 
-const bodyParser = require("body-parser");
 
-const cookieParser = require("cookie-parser");
+
+ const cookieParser = require("cookie-parser");
 
 const cors = require("cors");
-const { cookie } = require('express-validator');
+
 
 const app = express();
+
+
+// using my define author routes 
+const author = require("./routes/auth.js");
+
 
 // connection to the mongoose 
 mongoose.connect(process.env.DATABASE, 
@@ -29,16 +34,22 @@ mongoose.connect(process.env.DATABASE,
     ()=> { console.log("DB PROBLEM");}
 );
 
+// this is middleeares
+ app.use(express.urlencoded({extended:true}));
+ app.use(express.json());
+ app.use(cors());
+ app.use(cookieParser());
 
-app.use(bodyParser.json());
-app.use(cors);
-app.use(cookieParser);
+
+// my routes
+// all my routes in this use will be prefix /api
+app.use('/api',author);
 
 
 
 // javascript myfunctionRun().then(if its run ).catch(if there is any problem );
 
-const port = process.env.PORT||8990;
+const port = process.env.PORT||9001;
 
 // now we are going to use the middleware with the routes that are define 
 
@@ -52,6 +63,8 @@ const admin = (req,res)=>{
 }
 
 app.get("/admin",isAdmin,admin);
+
+// definig the routes 
 
 app.listen(port,
     

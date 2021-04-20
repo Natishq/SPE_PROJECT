@@ -2,9 +2,8 @@ const crypto = require('crypto');
 const moongoose = require("mongoose");
 const uuidv1 = require('uuid/v1');
 
-const schema = new moongoose.Schema;
 
-var userSchema = schema(
+var userSchema = new moongoose.Schema(
 
     {
         name :  {
@@ -55,7 +54,7 @@ var userSchema = schema(
 );
 
 // this is the method to the schema that we definig to set cypted password using the plain text password we are getting 
-userSchema.method = {
+userSchema.methods= {
     securePassword : function(plainstring)
                     {
                         if(!plainstring) return "";
@@ -96,4 +95,4 @@ userSchema.virtual('password')
 // now we are going to use virtuals for cumputing stuff on the fly ! Note they are not stored in mongodb and they are not part 
 // of json object by default  
 
-module.exports = mongoose.model("User",userSchema);
+module.exports = moongoose.model("User",userSchema);
