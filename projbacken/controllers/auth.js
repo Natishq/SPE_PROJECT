@@ -58,6 +58,8 @@ exports.signup = (req,res)=> {
   });
 };
 
+
+
 exports.signin = (req,res) => {
 
     const error = validationResult(req);
@@ -67,7 +69,7 @@ exports.signin = (req,res) => {
     {
         ans = [];
 
-        error.array().forEach(element =>{
+        error.array().forEach(element => {
         x = {message: element.msg , parameter :element.param }
         ans.push(x);   
         });
@@ -117,3 +119,47 @@ exports.signin = (req,res) => {
 
 }
 
+exports.signout = (req,res) => {
+
+    // just to clear the cookie 
+    // refer to jWT 
+    res.clearCookie("token");
+    
+    res.json({
+        message: "User signout Successfully"
+    });
+}
+
+//protected routes 
+
+
+exports.isSignedIn = expressJwt({
+    secret:process.env.SECRATE,
+    userProperty:"auth" <- here it adds the auth attribute to the req body
+});
+
+
+
+// custom middleware 
+
+exports.isAuthenticated= (req,res,next)=> {
+    let check = req.profile && req.auth && req.profile._id === req.auth._id ;
+
+    if(!check)
+    {
+        res.status(403).json({
+            error: "ACCESS DENIED"
+        });
+    }
+    next();
+};
+
+exports.isAdmin = (req,res,next) => {
+ if (req.profile.role === 0)
+ {
+     res.status(403).json({
+        error:"DONT HAVE ADMIN RIGHTS"
+     });
+ }
+ next();
+};
