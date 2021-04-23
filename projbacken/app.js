@@ -16,10 +16,9 @@ const cors = require("cors");
 
 const app = express();
 
-
 // using my define author routes 
 const author = require("./routes/auth.js");
-
+const userRoutes = require("./routes/user.js");
 
 // connection to the mongoose 
 mongoose.connect(process.env.DATABASE, 
@@ -44,6 +43,8 @@ mongoose.connect(process.env.DATABASE,
 // my routes
 // all my routes in this use will be prefix /api
 app.use('/api',author);
+app.use('/api',userRoutes); // <- we have imported the routes see line 21
+
 
 
 

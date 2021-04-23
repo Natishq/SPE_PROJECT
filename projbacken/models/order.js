@@ -1,5 +1,5 @@
 
-const mongoose = required('mongoose');
+const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Schema;
 
@@ -26,14 +26,13 @@ const orderSchema = new mongoose.Schema(
         address : String,
         update : Date,
         user : {
-            type =ObjectId,
-            ref = "User",
-
+            type : ObjectId,
+            ref : "User"
         }
         
 
 
-    }
+    },
         {timestamp:true}
 
     
