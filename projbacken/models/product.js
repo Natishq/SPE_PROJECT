@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema(
             type:Number,
             required:true,
             maxlength:20,
-            trim = false
+            trim :false
 
         },
 

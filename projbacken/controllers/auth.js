@@ -21,6 +21,7 @@ exports.signout  = (req,res)=>{
 // we will inport our model class to it 
 const User = require("../models/user");
 
+// for creating a user 
 exports.signup = (req,res)=> {
 
     const errors = validationResult(req);
@@ -59,7 +60,7 @@ exports.signup = (req,res)=> {
 };
 
 
-
+// for generating the token and making it sign in 
 exports.signin = (req,res) => {
 
     const error = validationResult(req);

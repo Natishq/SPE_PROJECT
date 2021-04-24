@@ -19,6 +19,8 @@ const app = express();
 // using my define author routes 
 const author = require("./routes/auth.js");
 const userRoutes = require("./routes/user.js");
+const categoryRoutes = require("./routes/category.js");
+const productRoutes = require("./routes/product");
 
 // connection to the mongoose 
 mongoose.connect(process.env.DATABASE, 
@@ -44,7 +46,8 @@ mongoose.connect(process.env.DATABASE,
 // all my routes in this use will be prefix /api
 app.use('/api',author);
 app.use('/api',userRoutes); // <- we have imported the routes see line 21
-
+app.use('/api',categoryRoutes);
+app.use('/api',productRoutes);
 
 
 
@@ -73,3 +76,4 @@ app.listen(port,
             console.log(`server startted ${port}`);
           }    
     );
+
