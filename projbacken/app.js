@@ -8,11 +8,13 @@ const mongoose = require('mongoose');
 const express = require('express');
 
 
+// to hadel the cookie
+const cookieParser = require("cookie-parser");
 
- const cookieParser = require("cookie-parser");
-
+// ask
 const cors = require("cors");
 
+// we also need bodyparser
 
 const app = express();
 
