@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-
-const { ObjectId } = mongoose.Schema;
+const { ObjectId } = require('mongoose');
 
 const productSchema = new mongoose.Schema(
 
@@ -44,7 +43,7 @@ const productSchema = new mongoose.Schema(
             default: 0
         },
 
-        profile : {
+        photo : {
             data:Buffer,
             contentType:String
         }

@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const {GetProductId, GetProduct, CreateProducts, GetP} = require('../controllers/product');
+const {GetProductId, GetProduct, CreateProducts, GetP,createProduct} = require('../controllers/product');
 const { getuserbyid } = require('../controllers/user');
 
 const { isSignedIn, isAuthenticated, isAdmin } = require('../controllers/auth');
@@ -15,7 +15,7 @@ router.param("userId",getuserbyid)
 router.get('/product',GetP);
 
 // router for creating the product 
-router.post('/product/create/:userId',isSignedIn,isAuthenticated,isAdmin,CreateProducts)
+router.post('/product/create/:userId',isSignedIn,isAuthenticated,isAdmin,createProduct)
 
 //router.post('/product/:userId/:productId',isSignedIn, isAuthenticated, isAdmin, CreateProduct)
 

@@ -11,7 +11,7 @@ exports.GetProductId = (req,res,next,id)=>{
 
     // here we are populating the product so that it contains the category also 
 
-    Product.findById(id).populate("category").exec((err,element)=>{
+    Product.findById(id).populate("Category").exec((err,element)=>{
         if(err || !element)
         {
             return res.status(400).json({ error:"error Occured at GetProductId"});
@@ -29,62 +29,48 @@ exports.GetP = (req,res)=>{
     return res.json({ message:"route working"})
 }
 
-exports.CreateProducts = (req,res) => {
-    
-    // the body will have the all the parameter which are send in post request in the form way  
-    
-    let form = new formidable.IncomingForm();
 
-    form.keepExtentions = true;
+exports.createProduct = (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
 
-    // fields - > it is regarding the parameter that we are passing in the form which has fileds and its value  
-    // files 
-    form.parse(req, (err,fields,file)=>{
-        
-        if(err)
-        {
-            return res.status(400).json({error : "problem with images "});
-        }
+  form.parse(req, (err, fields, file) => {
+    if (err) {
+      return res.status(400).json({
+        error: "problem with image"
+      });
+    }
 
-        
-        //TODO: restriction on fields -> what type of values that we are excepting 
-        // now we are going to have simple restriction for the feilds
-        // destructuring the data 
-        const {name,description,price,category,stock } = fields
+    //TODO: restrictions on field
+    const {name,description,price,category,stock } = fields
 
         if(!name || !price || !category || !description || !stock)
         {
             return res.status(400).json({ error:"Some fields are not present"});
         }
-        let  product = new Product(fields);
 
-        // handel file here
-        try
-        { 
-            if(file.photo)
-            {
-                if(file.photo.size > 3000000)
-                {
-                    return res.status(400).json({ error : "file Size to big"});
-                }
+    let product = new Product(fields);
 
-                product.photo.data = fs.readFileSync(file.photo.path);
-                product.photo.contentType = file.photo.type;
-            }
-        }
-        catch(err)
-        {
-            return res.status(400).json({ error: "error occured at saving pic"});
-        }
+    //handle file here
+    if (file.photo) {
+      if (file.photo.size > 3000000) {
+        return res.status(400).json({
+          error: "File size too big!"
+        });
+      }
+      product.photo.data = fs.readFileSync(file.photo.path);
+      product.photo.contentType = file.photo.type;
+    }
 
-        // saving the model to the db
-        product.save((err,element)=>{
-            if(err || !element)
-            {
-                return res.status(400).json({ error: "product saving fail"});
-            }
-            res.json(product);
-        })
-    }) 
+    //save to the DB
+    product.save((err, product) => {
+      if (err) {
+        res.status(400).json({
+          error: "Saving tshirt in DB failed"
+        });
+      }
+      res.json(product);
+    });
+  });
 
-}
+};
