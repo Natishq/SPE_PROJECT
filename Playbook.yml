@@ -1,0 +1,8 @@
+---
+- name: Deploy docker images
+  hosts: remoteserver
+  tasks:
+    - name: Pull backend docker image
+      shell: docker pull natishq/backend:1.0.0
+    - name: Pull frontend docker image
+      shell: docker pull natishq/frontend:1.0.0
